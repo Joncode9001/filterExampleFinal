@@ -72,6 +72,54 @@ struct ContentView: View {
                         }
                     }
                 }
+                    Button("Chrome")
+                    {
+                        if let inputImage = selectedImage{
+                            let beginImage = CIImage(image: inputImage)
+                            let currentFilter = CIFilter.photoEffectChrome()
+                            currentFilter.inputImage = beginImage
+
+                            
+                            guard let outputImage = currentFilter.outputImage else { return }
+                            if let cgImage =  context.createCGImage(outputImage, from: outputImage.extent)
+                            {
+                                let uiImage = UIImage(cgImage: cgImage)
+                                self.selectedImage = uiImage
+                        }
+                    }
+                }
+                    Button("Noir")
+                    {
+                        if let inputImage = selectedImage{
+                            let beginImage = CIImage(image: inputImage)
+                            let currentFilter = CIFilter.photoEffectNoir()
+                            currentFilter.inputImage = beginImage
+
+                            
+                            guard let outputImage = currentFilter.outputImage else { return }
+                            if let cgImage =  context.createCGImage(outputImage, from: outputImage.extent)
+                            {
+                                let uiImage = UIImage(cgImage: cgImage)
+                                self.selectedImage = uiImage
+                        }
+                    }
+                }
+                    Button("Kaleidoscope")
+                    {
+                        if let inputImage = selectedImage{
+                            let beginImage = CIImage(image: inputImage)
+                            let currentFilter = CIFilter.kaleidoscope()
+                            currentFilter.inputImage = beginImage
+
+                            
+                            guard let outputImage = currentFilter.outputImage else { return }
+                            if let cgImage =  context.createCGImage(outputImage, from: outputImage.extent)
+                            {
+                                let uiImage = UIImage(cgImage: cgImage)
+                                self.selectedImage = uiImage
+                        }
+                    }
+                }
             }.sheet(isPresented: self.$displayPickerView)
             {
                 ImagePickerView(selectedImage: self.$selectedImage, sourceType: self.sourceType)
